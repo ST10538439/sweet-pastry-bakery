@@ -4,31 +4,131 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sweet Pastry Bakery — Home</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
   <!-- Header and Navigation -->
   <header>
-    <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="products.html">Products</a></li>
-        <li><a href="enquiry.html">Enquiry</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </nav>
+    <div class="header-inner">
+      <span class="logo">Sweet Pastry Bakery</span>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="enquiry.html">Enquiry</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div><!-- end .header-inner -->
   </header>
 
   <!-- Main Content -->
   <main>
-    <h1>Welcome to Sweet Pastry Bakery</h1>
-    <p>Your page content goes here.</p>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Freshly Baked </h1>
+        <p>Artisan breads, pastries and cakes that are made exclusively at the heart of Pretoria.</p>
+        <a href="products.html" class="btn">View Products</a>
+      </div>
+    </section>
+
+    <!-- Featured Products Section -->
+    <section class="featured">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Popular Favourites</h2>
+          <p>A taste of our fresh pastries.</p>
+        </div>
+
+        <div class="grid-3col">
+
+          <!-- Card 1 -->
+          <div class="card">
+            <img src="images/gallery/sourdough-loaves.jpg" alt="Freshly baked artisan sourdough bread">
+            <div class="card-body">
+              <h3>Artisan Breads</h3>
+              <p>Stone-baked sourdough and rye loaves crafted fresh every morning using Mzansi methods.</p>
+              <a href="products.html" class="btn">Shop here, Now!</a>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="card">
+            <img src="images/gallery/pastry-display.jpg" alt="Buttery croissants and fresh pastries">
+            <div class="card-body">
+              <h3>Pastries</h3>
+              <p>Buttery croissants, flaky danishes and seasonal fruit tarts baked fresh daily.</p>
+              <a href="products.html" class="btn">Shop Now</a>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="card">
+            <img src="images/gallery/birthday-cake.jpg" alt="Custom celebration cake with decorations">
+            <div class="card-body">
+              <h3>Custom Cakes</h3>
+              <p>Bespoke celebration cakes designed and baked around your preference.</p>
+              <a href="enquiry.html" class="btn">Order Now</a>
+            </div>
+          </div>
+
+        </div><!-- end .grid-3col -->
+      </div><!-- end .container -->
+    </section>
+
+    <!-- About Snippet Section -->
+    <section class="about-snippet">
+      <div class="container">
+        <div class="about-grid">
+
+          <div class="about-text">
+            <h2>How we Became</h2>
+            <p>Sweet Pastry Bakery was founded in 2020 with 1 goal — to bring honest,
+            wholesome artisan baking back to the streets of Pretoria. Every loaf, pastry
+            and cake is made by hand using locally sourced ingredients.</p>
+            <p>Trust us when we say you will not taste anything as savoury as our 
+              freshly baked goods, you dont want to miss an experience of a lifetime.</p>
+            <a href="about.html" class="btn">More About Us</a>
+          </div>
+
+          <div class="about-image">
+            <img src="images/gallery/bakery-interior.jpg" alt="Inside the Sweet Pastry Bakery kitchen">
+          </div>
+
+        </div><!-- end .about-grid -->
+      </div><!-- end .container -->
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="cta">
+      <div class="container">
+        <h2>Have a Special Order in Mind?</h2>
+        <p>We love creating custom cakes and catering packages for events of all sizes.
+        Get in touch and we will make it happen.</p>
+        <a href="enquiry.html" class="btn">Make an Enquiry</a>
+      </div>
+    </section>
+
   </main>
 
   <!-- Footer -->
   <footer>
-    <p>&copy; 2026 Sweet Pastry Bakery. All rights reserved.</p>
+    <div class="container">
+      <p>1003 Pretorius Sreet, Hatfield, Pretoria | Tel: 012 765 4321 | sanibonani@sweetpastrybakery.co.za</p>
+      <p>&copy; 2026 Sweet Pastry Bakery. All rights reserved.</p>
+    </div>
   </footer>
 
 </body>
