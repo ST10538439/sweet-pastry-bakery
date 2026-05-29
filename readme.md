@@ -37,6 +37,11 @@ Website that works perfectly well, for Wede5020. Sjould be responsive!
 - [2026-05-20] All 5 HTML pages created with semantic markup
 - [2026-05-20] Navigation links connected across all pages
 
+### Part 1 Feedback Fixes
+-  Fixed: added more better images 
+-  Fixed: added missing comments to index.html
+
+
 ## References
 - Unsplash. 2026. Available at: https://unsplash.com [Accessed: 20 May 2026].
 - W3Schools. 2026. Available at: https://www.w3schools.com [Accessed: 20 May 2026].
