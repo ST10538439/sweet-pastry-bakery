@@ -33,9 +33,109 @@
 
   <!-- Main Content -->
   <main>
-    <h1>Contact Us</h1>
-    <p>If you have any questions or would like to get in touch with us, please use the information below:</p>
-  </main>
+
+  <section class="page-hero">
+    <div class="container">
+      <h1>Contact Us</h1>
+      <p>We'd love to hear from you — stop in, call, or drop us a message.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="contact-grid">
+
+        <!-- Contact Form -->
+        <div>
+          <h2>Send Us a Message</h2>
+          <form action="#" method="POST">
+
+            <div class="form-group">
+              <label for="contact-name">Full Name *</label>
+              <input type="text" id="contact-name" name="name" placeholder="Your full name" required>
+            </div>
+
+            <div class="form-group">
+              <label for="contact-email">Email Address *</label>
+              <input type="email" id="contact-email" name="email" placeholder="Your email address" required>
+            </div>
+
+            <div class="form-group">
+              <label for="message-type">Message Type *</label>
+              <select id="message-type" name="message-type" required>
+                <option value="">— Select type —</option>
+                <option value="general">General Enquiry</option>
+                <option value="feedback">Feedback</option>
+                <option value="complaint">Complaint</option>
+                <option value="wholesale">Wholesale Enquiry</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="contact-message">Your Message *</label>
+              <textarea id="contact-message" name="message" placeholder="Type your message here..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn">Send Message</button>
+
+          </form>
+        </div>
+
+        <!-- Contact Details -->
+        <div class="contact-info">
+          <h2>Our Locations</h2>
+
+          <h3>Main Bakery — Hatfield</h3>
+          <p>1003 Pretorius Street, Hatfield, Pretoria, 0083</p>
+          <p><strong>Tel:</strong> 012 765 4321</p>
+          <p><strong>Hours:</strong> Mon–Fri 06:00–18:00 | Sat 06:00–14:00 | Sun Closed</p>
+
+          <h3 style="margin-top: 1.5rem;">Second Branch — Menlyn</h3>
+          <p>Shop 14, Menlyn Maine, Pretoria, 0181</p>
+          <p><strong>Tel:</strong> 012 765 9876</p>
+          <p><strong>Hours:</strong> Mon–Sun 08:00–20:00</p>
+
+          <p style="margin-top: 1.5rem;"><strong>Email:</strong> sanibonani@sweetpastrybakery.co.za</p>
+        </div>
+
+      </div>
+
+      <!-- Maps -->
+      <h2 style="margin-top: 3rem; margin-bottom: 1rem;">Find Us</h2>
+      <div class="grid-2col">
+
+        <div>
+          <h3>Hatfield Branch</h3>
+          <div class="map-container">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3593.1!2d28.2293!3d-25.7479!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjXCsDQ0JzUyLjQiUyAyOMKwMTMnNDUuNSJF!5e0!3m2!1sen!2sza!4v1234567890"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Sweet Pastry Bakery Hatfield Location">
+            </iframe>
+          </div>
+        </div>
+
+        <div>
+          <h3>Menlyn Branch</h3>
+          <div class="map-container">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3593.1!2d28.2772!3d-25.7826!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjXCsDQ2JzU3LjQiUyAyOMKwMTYnMzguMCJF!5e0!3m2!1sen!2sza!4v1234567890"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Sweet Pastry Bakery Menlyn Location">
+            </iframe>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main>
 
   <!-- Footer -->
   <footer>
