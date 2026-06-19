@@ -478,3 +478,66 @@ nav ul li a.active-link {
   color: var(--color-accent);
   border-bottom: 2px solid var(--color-accent);
 }
+/* ── Product Filter Bar ─────────────────────── */
+.filter-bar {
+  background-color: var(--color-bg);
+  padding: 1.5rem 0;
+  border-bottom: 1px solid #e0d6cc;
+}
+
+.filter-inner {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+#product-search {
+  padding: 0.6rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  width: 220px;
+  transition: border-color 0.3s ease;
+}
+
+#product-search:focus {
+  outline: none;
+  border-color: var(--color-secondary);
+}
+
+.filter-buttons {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  padding: 0.5rem 1.25rem;
+  border: 2px solid var(--color-secondary);
+  background: none;
+  color: var(--color-secondary);
+  border-radius: 4px;
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filter-btn:hover,
+.filter-btn.active-filter {
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+}
+
+@keyframes fadeInCard {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+  .filter-inner { flex-direction: column; align-items: flex-start; }
+  #product-search { width: 100%; }
+}

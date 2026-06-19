@@ -41,6 +41,25 @@
 
   <!-- Page Header -->
   <section class="page-hero">
+    <!-- Search and Filter Bar -->
+<section class="filter-bar">
+  <div class="container">
+    <div class="filter-inner">
+      <input
+        type="text"
+        id="product-search"
+        placeholder="Search products..."
+        aria-label="Search products">
+      <div class="filter-buttons">
+        <button class="filter-btn active-filter" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="bread">Breads</button>
+        <button class="filter-btn" data-filter="pastry">Pastries</button>
+        <button class="filter-btn" data-filter="cake">Cakes</button>
+        <button class="filter-btn" data-filter="seasonal">Seasonal</button>
+      </div>
+    </div>
+  </div>
+</section>
     <div class="container">
       <h1>Our Products</h1>
       <p>Everything is baked fresh daily — no day-old stock, ever.</p>
@@ -56,7 +75,7 @@
       </div>
       <div class="grid-3col">
 
-        <div class="card">
+        <div class="card" data-category="bread">
           <img src="images/products/sourdough-bread.jpg" alt="Classic sourdough loaf">
           <div class="card-body">
             <h3>Classic Sourdough</h3>
@@ -66,7 +85,7 @@
           </div>
         </div>
 
-        <div class="card">
+        <div class="card" data-category="bread">
           <img src="images/products/wholewheat-bread.jpg" alt="Whole wheat loaf">
           <div class="card-body">
             <h3>Whole Wheat Loaf</h3>
@@ -76,7 +95,7 @@
           </div>
         </div>
 
-        <div class="card">
+        <div class="card" data-category="bread">
           <img src="images/gallery/bread-assortment.jpg" alt="Assorted artisan breads">
           <div class="card-body">
             <h3>Bread Assortment Box</h3>
@@ -99,7 +118,7 @@
       </div>
       <div class="grid-3col">
 
-        <div class="card">
+        <div class="card" data-category="pastry">
           <img src="images/products/croissants.jpg" alt="Freshly baked butter croissants">
           <div class="card-body">
             <h3>Butter Croissants</h3>
@@ -109,7 +128,7 @@
           </div>
         </div>
 
-        <div class="card">
+        <div class="card" data-category="pastry">
           <img src="images/products/danish-pastry.jpg" alt="Fruit danish pastry">
           <div class="card-body">
             <h3>Fruit Danishes</h3>
@@ -119,7 +138,7 @@
           </div>
         </div>
 
-        <div class="card">
+        <div class="card" data-category="pastry">
           <img src="images/gallery/dessert-tray.jpg" alt="Dessert tray selection">
           <div class="card-body">
             <h3>Dessert Tray</h3>
@@ -142,7 +161,7 @@
       </div>
       <div class="grid-3col">
 
-        <div class="card">
+        <div class="card" data-category="cake">
           <img src="images/gallery/birthday-cake.jpg" alt="Custom birthday cake">
           <div class="card-body">
             <h3>Birthday Cakes</h3>
@@ -152,7 +171,7 @@
           </div>
         </div>
 
-        <div class="card">
+        <div class="card" data-category="cake">
           <img src="images/gallery/wedding-cake.jpg" alt="Elegant wedding cake">
           <div class="card-body">
             <h3>Wedding Cakes</h3>
@@ -162,7 +181,7 @@
           </div>
         </div>
 
-        <div class="card">
+        <div class="card" data-category="cake">
           <img src="images/products/branded-cake.jpg" alt="Corporate event cake">
           <div class="card-body">
             <h3>Corporate & Events</h3>
@@ -184,7 +203,7 @@
         <p>Limited runs — when they're gone, they're gone.</p>
       </div>
       <div class="grid-2col">
-        <div class="card">
+        <div class="card" data-category="special">
           <img src="images/products/cardamon.jpg" alt="Seasonal special bake">
           <div class="card-body">
             <h3>Winter Spiced Loaf</h3>
@@ -193,7 +212,7 @@
             <a href="enquiry.html" class="btn">Order While Available</a>
           </div>
         </div>
-        <div class="card">
+        <div class="card" data-category="special">
           <img src="images/products/dessert-box.jpg" alt="Seasonal dessert selection">
           <div class="card-body">
             <h3>Festive Dessert Box</h3>
