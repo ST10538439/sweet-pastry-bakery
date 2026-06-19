@@ -622,3 +622,34 @@ nav ul li a.active-link {
 .lightbox-close:hover,
 .lightbox-prev:hover,
 .lightbox-next:hover { color: var(--color-accent); }
+/* ── Form Validation Styles ─────────────────── */
+.error-msg {
+  display: none;
+  color: #c0392b;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+.input-error {
+  border-color: #c0392b !important;
+  box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.15) !important;
+}
+
+/* ── Enquiry Response Box ───────────────────── */
+.response-box {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background-color: #eafaf1;
+  border-left: 4px solid #27ae60;
+  border-radius: 4px;
+}
+
+.response-box h3 {
+  color: #1e6b3a;
+  margin-bottom: 0.75rem;
+}
+
+.response-box p {
+  color: var(--color-text);
+  margin-bottom: 0.5rem;
+}

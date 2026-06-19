@@ -6,6 +6,138 @@
 
 /* ── 1. Wait for page to fully load before running anything ── */
 document.addEventListener('DOMContentLoaded', function () {
+/* ── 7. Enquiry Form Validation + Price Response ────────────
+     Validates all fields and returns a pricing estimate       */
+  const enquiryForm = document.getElementById('enquiry-form');
+
+  if (enquiryForm) {
+
+    /* Pricing map per product type */
+    const pricing = {
+      'bread':        { label: 'Artisan Breads',         price: 'from R 65 per loaf' },
+      'pastries':     { label: 'Pastries & Desserts',    price: 'from R 28 per item / R 320 per tray' },
+      'birthday-cake':{ label: 'Birthday Cake',          price: 'from R 450' },
+      'wedding-cake': { label: 'Wedding Cake',           price: 'from R 1 800' },
+      'corporate':    { label: 'Corporate / Events',     price: 'from R 650' },
+      'seasonal':     { label: 'Seasonal Specials',      price: 'from R 75 per item' },
+      'other':        { label: 'Custom Order',           price: 'price confirmed after consultation' }
+    };
+
+    function showError(fieldId, message) {
+      const el = document.getElementById(fieldId + '-error');
+      if (el) { el.textContent = message; el.style.display = 'block'; }
+      const input = document.getElementById(fieldId);
+      if (input) input.classList.add('input-error');
+    }
+
+    function clearError(fieldId) {
+      const el = document.getElementById(fieldId + '-error');
+      if (el) { el.textContent = ''; el.style.display = 'none'; }
+      const input = document.getElementById(fieldId);
+      if (input) input.classList.remove('input-error');
+    }
+
+    function clearAllErrors() {
+      ['name','email','phone','product','date','guests'].forEach(clearError);
+    }
+
+    enquiryForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      clearAllErrors();
+
+      let valid = true;
+
+      /* Name — letters and spaces only, at least 2 characters */
+      const name = document.getElementById('name').value.trim();
+      if (!name || name.length < 2) {
+        showError('name', 'Please enter your full name (at least 2 characters).');
+        valid = false;
+      } else if (!/^[A-Za-z\s'-]+$/.test(name)) {
+        showError('name', 'Name may only contain letters, spaces, hyphens and apostrophes.');
+        valid = false;
+      }
+
+      /* Email — basic format check */
+      const email = document.getElementById('email').value.trim();
+      if (!email) {
+        showError('email', 'Please enter your email address.');
+        valid = false;
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showError('email', 'Please enter a valid email address (e.g. name@example.com).');
+        valid = false;
+      }
+
+      /* Phone — SA format: 10 digits, optionally with spaces */
+      const phone = document.getElementById('phone').value.trim();
+      const phoneClean = phone.replace(/\s+/g, '');
+      if (!phone) {
+        showError('phone', 'Please enter your phone number.');
+        valid = false;
+      } else if (!/^0[0-9]{9}$/.test(phoneClean)) {
+        showError('phone', 'Please enter a valid SA phone number (e.g. 082 000 0000).');
+        valid = false;
+      }
+
+      /* Product — must select something */
+      const product = document.getElementById('product').value;
+      if (!product) {
+        showError('product', 'Please select a product or service.');
+        valid = false;
+      }
+
+      /* Date — must be today or in the future */
+      const dateVal = document.getElementById('date').value;
+      if (!dateVal) {
+        showError('date', 'Please select your required date.');
+        valid = false;
+      } else {
+        const chosen = new Date(dateVal);
+        const today  = new Date();
+        today.setHours(0, 0, 0, 0);
+        if (chosen < today) {
+          showError('date', 'Please select a date from today onwards.');
+          valid = false;
+        }
+      }
+
+      /* Guests — if provided, must be a positive number */
+      const guests = document.getElementById('guests').value;
+      if (guests && (isNaN(guests) || parseInt(guests) < 1)) {
+        showError('guests', 'Please enter a valid number of guests (minimum 1).');
+        valid = false;
+      }
+
+      /* If everything is valid — show price response */
+      if (valid) {
+        const info     = pricing[product] || { label: product, price: 'to be confirmed' };
+        const guestLine = guests
+          ? '<p>We\'ll prepare enough for approximately <strong>' + guests + ' guests</strong>.</p>'
+          : '';
+        const chosenDate = new Date(dateVal).toLocaleDateString('en-ZA', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+
+        const responseBox = document.getElementById('enquiry-response');
+        responseBox.innerHTML =
+          '<h3>Thank you, ' + name.split(' ')[0] + '!</h3>' +
+          '<p>We\'ve received your enquiry for <strong>' + info.label + '</strong>.</p>' +
+          '<p>Estimated pricing: <strong>' + info.price + '</strong>.</p>' +
+          '<p>Required date: <strong>' + chosenDate + '</strong>.</p>' +
+          guestLine +
+          '<p>A member of our team will contact you at <strong>' + email + '</strong> within 24 hours to confirm your order and final pricing.</p>';
+        responseBox.style.display = 'block';
+        responseBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        enquiryForm.reset();
+      }
+    });
+
+    /* Real-time validation — clear error as user types */
+    ['name','email','phone','product','date','guests'].forEach(function (fieldId) {
+      const el = document.getElementById(fieldId);
+      if (el) {
+        el.addEventListener('input', function () { clearError(fieldId); });
+        el.addEventListener('change', function () { clearError(fieldId); });
+      }
+    });
+  }
   
   /* ── 5. Product Filter and Search ──────────────────────────
      Filters product cards by category and search keyword     */

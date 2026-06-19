@@ -56,55 +56,64 @@
         <!-- Enquiry Form -->
         <div>
           <h2>Order Enquiry Form</h2>
-          <form action="#" method="POST">
+          <form id="enquiry-form" novalidate>
 
-            <div class="form-group">
-              <label for="name">Full Name *</label>
-              <input type="text" id="name" name="name" placeholder="e.g. Thandiwe Mokoena" required>
-            </div>
+  <div class="form-group">
+    <label for="name">Full Name *</label>
+    <input type="text" id="name" name="name" placeholder="e.g. Thandiwe Mokoena">
+    <span class="error-msg" id="name-error"></span>
+  </div>
 
-            <div class="form-group">
-              <label for="email">Email Address *</label>
-              <input type="email" id="email" name="email" placeholder="e.g. thandiwe@email.com" required>
-            </div>
+  <div class="form-group">
+    <label for="email">Email Address *</label>
+    <input type="email" id="email" name="email" placeholder="e.g. thandiwe@email.com">
+    <span class="error-msg" id="email-error"></span>
+  </div>
 
-            <div class="form-group">
-              <label for="phone">Phone Number *</label>
-              <input type="tel" id="phone" name="phone" placeholder="e.g. 082 000 0000" required>
-            </div>
+  <div class="form-group">
+    <label for="phone">Phone Number *</label>
+    <input type="tel" id="phone" name="phone" placeholder="e.g. 082 000 0000">
+    <span class="error-msg" id="phone-error"></span>
+  </div>
 
-            <div class="form-group">
-              <label for="product">Product / Service *</label>
-              <select id="product" name="product" required>
-                <option value="">— Select a product —</option>
-                <option value="bread">Artisan Breads</option>
-                <option value="pastries">Pastries & Desserts</option>
-                <option value="birthday-cake">Birthday Cake</option>
-                <option value="wedding-cake">Wedding Cake</option>
-                <option value="corporate">Corporate / Events</option>
-                <option value="seasonal">Seasonal Specials</option>
-                <option value="other">Other</option>
-              </select>
-            </div>
+  <div class="form-group">
+    <label for="product">Product / Service *</label>
+    <select id="product" name="product">
+      <option value="">— Select a product —</option>
+      <option value="bread">Artisan Breads</option>
+      <option value="pastries">Pastries &amp; Desserts</option>
+      <option value="birthday-cake">Birthday Cake</option>
+      <option value="wedding-cake">Wedding Cake</option>
+      <option value="corporate">Corporate / Events</option>
+      <option value="seasonal">Seasonal Specials</option>
+      <option value="other">Other</option>
+    </select>
+    <span class="error-msg" id="product-error"></span>
+  </div>
 
-            <div class="form-group">
-              <label for="date">Required Date *</label>
-              <input type="date" id="date" name="date" required>
-            </div>
+  <div class="form-group">
+    <label for="date">Required Date *</label>
+    <input type="date" id="date" name="date">
+    <span class="error-msg" id="date-error"></span>
+  </div>
 
-            <div class="form-group">
-              <label for="guests">Number of Guests / Portions</label>
-              <input type="number" id="guests" name="guests" placeholder="e.g. 50" min="1">
-            </div>
+  <div class="form-group">
+    <label for="guests">Number of Guests / Portions</label>
+    <input type="number" id="guests" name="guests" placeholder="e.g. 50" min="1">
+    <span class="error-msg" id="guests-error"></span>
+  </div>
 
-            <div class="form-group">
-              <label for="message">Additional Details</label>
-              <textarea id="message" name="message" placeholder="Tell us more about your order — flavours, design ideas, dietary requirements, etc."></textarea>
-            </div>
+  <div class="form-group">
+    <label for="message">Additional Details</label>
+    <textarea id="message" name="message" placeholder="Flavours, design ideas, dietary requirements, etc."></textarea>
+  </div>
 
-            <button type="submit" class="btn">Submit Enquiry</button>
+  <button type="submit" class="btn">Submit Enquiry</button>
 
-          </form>
+</form>
+
+<!-- Response Box — shown after valid submission -->
+<div id="enquiry-response" class="response-box" style="display:none;"></div>
         </div>
 
         <!-- Info Panel -->
