@@ -6,6 +6,94 @@
 
 /* ── 1. Wait for page to fully load before running anything ── */
 document.addEventListener('DOMContentLoaded', function () {
+  /* ── 8. Contact Form Validation + Mailto Email ──────────────
+     Validates the contact form and opens a pre-filled email   */
+  const contactForm = document.getElementById('contact-form');
+
+  if (contactForm) {
+
+    function showContactError(fieldId, message) {
+      const el = document.getElementById(fieldId + '-error');
+      if (el) { el.textContent = message; el.style.display = 'block'; }
+      const input = document.getElementById(fieldId);
+      if (input) input.classList.add('input-error');
+    }
+
+    function clearContactError(fieldId) {
+      const el = document.getElementById(fieldId + '-error');
+      if (el) { el.textContent = ''; el.style.display = 'none'; }
+      const input = document.getElementById(fieldId);
+      if (input) input.classList.remove('input-error');
+    }
+
+    contactForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      ['contact-name','contact-email','message-type','contact-message'].forEach(clearContactError);
+
+      let valid = true;
+
+      /* Name */
+      const name = document.getElementById('contact-name').value.trim();
+      if (!name || name.length < 2) {
+        showContactError('contact-name', 'Please enter your full name.');
+        valid = false;
+      }
+
+      /* Email */
+      const email = document.getElementById('contact-email').value.trim();
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showContactError('contact-email', 'Please enter a valid email address.');
+        valid = false;
+      }
+
+      /* Message type */
+      const msgType = document.getElementById('message-type').value;
+      if (!msgType) {
+        showContactError('message-type', 'Please select a message type.');
+        valid = false;
+      }
+
+      /* Message — minimum 20 characters */
+      const message = document.getElementById('contact-message').value.trim();
+      if (!message || message.length < 20) {
+        showContactError('contact-message', 'Please enter a message of at least 20 characters.');
+        valid = false;
+      }
+
+      if (valid) {
+        /* Build mailto link so the email opens in the user's mail client */
+        const subject  = encodeURIComponent('Sweet Pastry Bakery — ' + msgType + ' from ' + name);
+        const body     = encodeURIComponent(
+          'Name: ' + name + '\n' +
+          'Email: ' + email + '\n' +
+          'Message Type: ' + msgType + '\n\n' +
+          'Message:\n' + message
+        );
+        const mailtoLink = 'mailto:sanibonani@sweetpastrybakery.co.za?subject=' + subject + '&body=' + body;
+        window.location.href = mailtoLink;
+
+        /* Show confirmation message */
+        const responseBox = document.getElementById('contact-response');
+        responseBox.innerHTML =
+          '<h3>Your message is ready to send!</h3>' +
+          '<p>Your email client should have opened with a pre-filled message addressed to us. If it did not open automatically, please email us directly at <strong>sanibonani@sweetpastrybakery.co.za</strong>.</p>' +
+          '<p>We aim to respond to all messages within 1 business day.</p>';
+        responseBox.style.display = 'block';
+        contactForm.reset();
+        responseBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
+      /* Real-time error clearing */
+      ['contact-name','contact-email','message-type','contact-message'].forEach(function (id) {
+        const el = document.getElementById(id);
+        if (el) {
+          el.addEventListener('input',  function () { clearContactError(id); });
+          el.addEventListener('change', function () { clearContactError(id); });
+        }
+      });
+    });
+  }
 /* ── 7. Enquiry Form Validation + Price Response ────────────
      Validates all fields and returns a pricing estimate       */
   const enquiryForm = document.getElementById('enquiry-form');
