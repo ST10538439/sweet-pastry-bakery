@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sweet-pastry-bakery.netlify.app/sitemap.xml
