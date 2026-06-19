@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://sweet-pastry-bakery.netlify.app/sitemap.xml
+Sitemap: https://shiny-donut-866d71.netlify.app/
