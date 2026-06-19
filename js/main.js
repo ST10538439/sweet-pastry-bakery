@@ -2,239 +2,75 @@
    Sweet Pastry Bakery — main.js
    Part 3: JavaScript Functionality
    Student: ST10538439
+   Module: WEDE5020
    ============================================================ */
 
-/* ── 1. Wait for page to fully load before running anything ── */
 document.addEventListener('DOMContentLoaded', function () {
-  /* ── 8. Contact Form Validation + Mailto Email ──────────────
-     Validates the contact form and opens a pre-filled email   */
-  const contactForm = document.getElementById('contact-form');
 
-  if (contactForm) {
+  /* ── 1. Hamburger Menu Toggle ──────────────────────────────
+     Toggles the nav open and closed on mobile screens        */
+  const hamburger = document.querySelector('.hamburger');
+  const navMenu   = document.querySelector('nav ul');
 
-    function showContactError(fieldId, message) {
-      const el = document.getElementById(fieldId + '-error');
-      if (el) { el.textContent = message; el.style.display = 'block'; }
-      const input = document.getElementById(fieldId);
-      if (input) input.classList.add('input-error');
-    }
+  if (hamburger && navMenu) {
+    hamburger.addEventListener('click', function () {
+      navMenu.classList.toggle('nav-open');
+      hamburger.classList.toggle('active');
+    });
 
-    function clearContactError(fieldId) {
-      const el = document.getElementById(fieldId + '-error');
-      if (el) { el.textContent = ''; el.style.display = 'none'; }
-      const input = document.getElementById(fieldId);
-      if (input) input.classList.remove('input-error');
-    }
-
-    contactForm.addEventListener('submit', function (e) {
-      e.preventDefault();
-
-      ['contact-name','contact-email','message-type','contact-message'].forEach(clearContactError);
-
-      let valid = true;
-
-      /* Name */
-      const name = document.getElementById('contact-name').value.trim();
-      if (!name || name.length < 2) {
-        showContactError('contact-name', 'Please enter your full name.');
-        valid = false;
-      }
-
-      /* Email */
-      const email = document.getElementById('contact-email').value.trim();
-      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        showContactError('contact-email', 'Please enter a valid email address.');
-        valid = false;
-      }
-
-      /* Message type */
-      const msgType = document.getElementById('message-type').value;
-      if (!msgType) {
-        showContactError('message-type', 'Please select a message type.');
-        valid = false;
-      }
-
-      /* Message — minimum 20 characters */
-      const message = document.getElementById('contact-message').value.trim();
-      if (!message || message.length < 20) {
-        showContactError('contact-message', 'Please enter a message of at least 20 characters.');
-        valid = false;
-      }
-
-      if (valid) {
-        /* Build mailto link so the email opens in the user's mail client */
-        const subject  = encodeURIComponent('Sweet Pastry Bakery — ' + msgType + ' from ' + name);
-        const body     = encodeURIComponent(
-          'Name: ' + name + '\n' +
-          'Email: ' + email + '\n' +
-          'Message Type: ' + msgType + '\n\n' +
-          'Message:\n' + message
-        );
-        const mailtoLink = 'mailto:sanibonani@sweetpastrybakery.co.za?subject=' + subject + '&body=' + body;
-        window.location.href = mailtoLink;
-
-        /* Show confirmation message */
-        const responseBox = document.getElementById('contact-response');
-        responseBox.innerHTML =
-          '<h3>Your message is ready to send!</h3>' +
-          '<p>Your email client should have opened with a pre-filled message addressed to us. If it did not open automatically, please email us directly at <strong>sanibonani@sweetpastrybakery.co.za</strong>.</p>' +
-          '<p>We aim to respond to all messages within 1 business day.</p>';
-        responseBox.style.display = 'block';
-        contactForm.reset();
-        responseBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-
-      /* Real-time error clearing */
-      ['contact-name','contact-email','message-type','contact-message'].forEach(function (id) {
-        const el = document.getElementById(id);
-        if (el) {
-          el.addEventListener('input',  function () { clearContactError(id); });
-          el.addEventListener('change', function () { clearContactError(id); });
-        }
+    document.querySelectorAll('nav ul li a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        navMenu.classList.remove('nav-open');
+        hamburger.classList.remove('active');
       });
     });
   }
-/* ── 7. Enquiry Form Validation + Price Response ────────────
-     Validates all fields and returns a pricing estimate       */
-  const enquiryForm = document.getElementById('enquiry-form');
 
-  if (enquiryForm) {
 
-    /* Pricing map per product type */
-    const pricing = {
-      'bread':        { label: 'Artisan Breads',         price: 'from R 65 per loaf' },
-      'pastries':     { label: 'Pastries & Desserts',    price: 'from R 28 per item / R 320 per tray' },
-      'birthday-cake':{ label: 'Birthday Cake',          price: 'from R 450' },
-      'wedding-cake': { label: 'Wedding Cake',           price: 'from R 1 800' },
-      'corporate':    { label: 'Corporate / Events',     price: 'from R 650' },
-      'seasonal':     { label: 'Seasonal Specials',      price: 'from R 75 per item' },
-      'other':        { label: 'Custom Order',           price: 'price confirmed after consultation' }
-    };
+  /* ── 2. Scroll Fade-In Animation ───────────────────────────
+     Elements fade up into view as the user scrolls down      */
+  const fadeElements = document.querySelectorAll('.card, .section-title, .about-grid, .page-hero');
 
-    function showError(fieldId, message) {
-      const el = document.getElementById(fieldId + '-error');
-      if (el) { el.textContent = message; el.style.display = 'block'; }
-      const input = document.getElementById(fieldId);
-      if (input) input.classList.add('input-error');
-    }
-
-    function clearError(fieldId) {
-      const el = document.getElementById(fieldId + '-error');
-      if (el) { el.textContent = ''; el.style.display = 'none'; }
-      const input = document.getElementById(fieldId);
-      if (input) input.classList.remove('input-error');
-    }
-
-    function clearAllErrors() {
-      ['name','email','phone','product','date','guests'].forEach(clearError);
-    }
-
-    enquiryForm.addEventListener('submit', function (e) {
-      e.preventDefault();
-      clearAllErrors();
-
-      let valid = true;
-
-      /* Name — letters and spaces only, at least 2 characters */
-      const name = document.getElementById('name').value.trim();
-      if (!name || name.length < 2) {
-        showError('name', 'Please enter your full name (at least 2 characters).');
-        valid = false;
-      } else if (!/^[A-Za-z\s'-]+$/.test(name)) {
-        showError('name', 'Name may only contain letters, spaces, hyphens and apostrophes.');
-        valid = false;
-      }
-
-      /* Email — basic format check */
-      const email = document.getElementById('email').value.trim();
-      if (!email) {
-        showError('email', 'Please enter your email address.');
-        valid = false;
-      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        showError('email', 'Please enter a valid email address (e.g. name@example.com).');
-        valid = false;
-      }
-
-      /* Phone — SA format: 10 digits, optionally with spaces */
-      const phone = document.getElementById('phone').value.trim();
-      const phoneClean = phone.replace(/\s+/g, '');
-      if (!phone) {
-        showError('phone', 'Please enter your phone number.');
-        valid = false;
-      } else if (!/^0[0-9]{9}$/.test(phoneClean)) {
-        showError('phone', 'Please enter a valid SA phone number (e.g. 082 000 0000).');
-        valid = false;
-      }
-
-      /* Product — must select something */
-      const product = document.getElementById('product').value;
-      if (!product) {
-        showError('product', 'Please select a product or service.');
-        valid = false;
-      }
-
-      /* Date — must be today or in the future */
-      const dateVal = document.getElementById('date').value;
-      if (!dateVal) {
-        showError('date', 'Please select your required date.');
-        valid = false;
-      } else {
-        const chosen = new Date(dateVal);
-        const today  = new Date();
-        today.setHours(0, 0, 0, 0);
-        if (chosen < today) {
-          showError('date', 'Please select a date from today onwards.');
-          valid = false;
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
         }
-      }
+      });
+    }, { threshold: 0.1 });
 
-      /* Guests — if provided, must be a positive number */
-      const guests = document.getElementById('guests').value;
-      if (guests && (isNaN(guests) || parseInt(guests) < 1)) {
-        showError('guests', 'Please enter a valid number of guests (minimum 1).');
-        valid = false;
-      }
-
-      /* If everything is valid — show price response */
-      if (valid) {
-        const info     = pricing[product] || { label: product, price: 'to be confirmed' };
-        const guestLine = guests
-          ? '<p>We\'ll prepare enough for approximately <strong>' + guests + ' guests</strong>.</p>'
-          : '';
-        const chosenDate = new Date(dateVal).toLocaleDateString('en-ZA', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-
-        const responseBox = document.getElementById('enquiry-response');
-        responseBox.innerHTML =
-          '<h3>Thank you, ' + name.split(' ')[0] + '!</h3>' +
-          '<p>We\'ve received your enquiry for <strong>' + info.label + '</strong>.</p>' +
-          '<p>Estimated pricing: <strong>' + info.price + '</strong>.</p>' +
-          '<p>Required date: <strong>' + chosenDate + '</strong>.</p>' +
-          guestLine +
-          '<p>A member of our team will contact you at <strong>' + email + '</strong> within 24 hours to confirm your order and final pricing.</p>';
-        responseBox.style.display = 'block';
-        responseBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        enquiryForm.reset();
-      }
+    fadeElements.forEach(function (el) {
+      el.classList.add('fade-in');
+      observer.observe(el);
     });
-
-    /* Real-time validation — clear error as user types */
-    ['name','email','phone','product','date','guests'].forEach(function (fieldId) {
-      const el = document.getElementById(fieldId);
-      if (el) {
-        el.addEventListener('input', function () { clearError(fieldId); });
-        el.addEventListener('change', function () { clearError(fieldId); });
-      }
+  } else {
+    fadeElements.forEach(function (el) {
+      el.classList.add('visible');
     });
   }
-  
-  /* ── 5. Product Filter and Search ──────────────────────────
-     Filters product cards by category and search keyword     */
+
+
+  /* ── 3. Active Nav Link Highlight ──────────────────────────
+     Marks the current page link in the navigation bar        */
+  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+  document.querySelectorAll('nav ul li a').forEach(function (link) {
+    if (link.getAttribute('href') === currentPage) {
+      link.classList.add('active-link');
+    }
+  });
+
+
+  /* ── 4. Product Filter and Search ──────────────────────────
+     Filters product cards by category button and search text
+     Only runs on products.html where these elements exist    */
   const filterBtns  = document.querySelectorAll('.filter-btn');
   const searchInput = document.getElementById('product-search');
   const allCards    = document.querySelectorAll('.card[data-category]');
 
   function applyFilter() {
-    const activeBtn  = document.querySelector('.filter-btn.active-filter');
+    const activeBtn    = document.querySelector('.filter-btn.active-filter');
     const activeFilter = activeBtn ? activeBtn.getAttribute('data-filter') : 'all';
     const searchTerm   = searchInput ? searchInput.value.toLowerCase().trim() : '';
 
@@ -252,8 +88,25 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   }
-  /* ── 6. Gallery Lightbox ────────────────────────────────────
-     Opens clicked gallery images in a full-screen overlay    */
+
+  if (filterBtns.length > 0) {
+    filterBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        filterBtns.forEach(function (b) { b.classList.remove('active-filter'); });
+        this.classList.add('active-filter');
+        applyFilter();
+      });
+    });
+  }
+
+  if (searchInput) {
+    searchInput.addEventListener('input', applyFilter);
+  }
+
+
+  /* ── 5. Gallery Lightbox ────────────────────────────────────
+     Opens gallery images in a full-screen overlay viewer
+     Supports keyboard navigation and click-outside-to-close  */
   const lightbox      = document.getElementById('lightbox');
   const lightboxImg   = document.getElementById('lightbox-img');
   const lightboxCap   = document.getElementById('lightbox-caption');
@@ -300,14 +153,12 @@ document.addEventListener('DOMContentLoaded', function () {
   if (lightboxPrev)  lightboxPrev.addEventListener('click', showPrev);
   if (lightboxNext)  lightboxNext.addEventListener('click', showNext);
 
-  /* Close lightbox when clicking outside the image */
   if (lightbox) {
     lightbox.addEventListener('click', function (e) {
       if (e.target === lightbox) closeLightbox();
     });
   }
 
-  /* Keyboard navigation */
   document.addEventListener('keydown', function (e) {
     if (!lightbox || !lightbox.classList.contains('lightbox-open')) return;
     if (e.key === 'Escape')     closeLightbox();
@@ -315,72 +166,230 @@ document.addEventListener('DOMContentLoaded', function () {
     if (e.key === 'ArrowRight') showNext();
   });
 
-  if (filterBtns.length > 0) {
-    filterBtns.forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        filterBtns.forEach(function (b) { b.classList.remove('active-filter'); });
-        this.classList.add('active-filter');
-        applyFilter();
-      });
+
+  /* ── 6. Enquiry Form Validation + Pricing Response ──────────
+     Validates all fields and returns an estimated price
+     based on the selected product type                        */
+  const enquiryForm = document.getElementById('enquiry-form');
+
+  if (enquiryForm) {
+
+    const pricing = {
+      'bread':         { label: 'Artisan Breads',       price: 'from R 65 per loaf' },
+      'pastries':      { label: 'Pastries & Desserts',  price: 'from R 28 per item / R 320 per tray' },
+      'birthday-cake': { label: 'Birthday Cake',        price: 'from R 450' },
+      'wedding-cake':  { label: 'Wedding Cake',         price: 'from R 1 800' },
+      'corporate':     { label: 'Corporate / Events',   price: 'from R 650' },
+      'seasonal':      { label: 'Seasonal Specials',    price: 'from R 75 per item' },
+      'other':         { label: 'Custom Order',         price: 'price confirmed after consultation' }
+    };
+
+    function showError(fieldId, message) {
+      const el = document.getElementById(fieldId + '-error');
+      if (el) { el.textContent = message; el.style.display = 'block'; }
+      const input = document.getElementById(fieldId);
+      if (input) input.classList.add('input-error');
+    }
+
+    function clearError(fieldId) {
+      const el = document.getElementById(fieldId + '-error');
+      if (el) { el.textContent = ''; el.style.display = 'none'; }
+      const input = document.getElementById(fieldId);
+      if (input) input.classList.remove('input-error');
+    }
+
+    enquiryForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      /* Clear all previous errors before re-validating */
+      ['name', 'email', 'phone', 'product', 'date', 'guests'].forEach(clearError);
+
+      let valid = true;
+
+      /* Name — letters, spaces, hyphens and apostrophes only */
+      const name = document.getElementById('name').value.trim();
+      if (!name || name.length < 2) {
+        showError('name', 'Please enter your full name (at least 2 characters).');
+        valid = false;
+      } else if (!/^[A-Za-z\s'-]+$/.test(name)) {
+        showError('name', 'Name may only contain letters, spaces, hyphens and apostrophes.');
+        valid = false;
+      }
+
+      /* Email — must match standard email format */
+      const email = document.getElementById('email').value.trim();
+      if (!email) {
+        showError('email', 'Please enter your email address.');
+        valid = false;
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showError('email', 'Please enter a valid email address (e.g. name@example.com).');
+        valid = false;
+      }
+
+      /* Phone — South African format: 10 digits starting with 0 */
+      const phone      = document.getElementById('phone').value.trim();
+      const phoneClean = phone.replace(/\s+/g, '');
+      if (!phone) {
+        showError('phone', 'Please enter your phone number.');
+        valid = false;
+      } else if (!/^0[0-9]{9}$/.test(phoneClean)) {
+        showError('phone', 'Please enter a valid SA phone number (e.g. 082 000 0000).');
+        valid = false;
+      }
+
+      /* Product — a selection must be made */
+      const product = document.getElementById('product').value;
+      if (!product) {
+        showError('product', 'Please select a product or service.');
+        valid = false;
+      }
+
+      /* Date — must be today or a future date */
+      const dateVal = document.getElementById('date').value;
+      if (!dateVal) {
+        showError('date', 'Please select your required date.');
+        valid = false;
+      } else {
+        const chosen = new Date(dateVal);
+        const today  = new Date();
+        today.setHours(0, 0, 0, 0);
+        if (chosen < today) {
+          showError('date', 'Please select a date from today onwards.');
+          valid = false;
+        }
+      }
+
+      /* Guests — optional but must be a positive whole number if entered */
+      const guests = document.getElementById('guests').value;
+      if (guests && (isNaN(guests) || parseInt(guests) < 1)) {
+        showError('guests', 'Please enter a valid number of guests (minimum 1).');
+        valid = false;
+      }
+
+      /* All valid — build and display pricing response */
+      if (valid) {
+        const info       = pricing[product] || { label: product, price: 'to be confirmed' };
+        const guestLine  = guests
+          ? '<p>We\'ll prepare enough for approximately <strong>' + guests + ' guests</strong>.</p>'
+          : '';
+        const chosenDate = new Date(dateVal).toLocaleDateString('en-ZA', {
+          weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+        });
+
+        const responseBox = document.getElementById('enquiry-response');
+        responseBox.innerHTML =
+          '<h3>Thank you, ' + name.split(' ')[0] + '!</h3>' +
+          '<p>We\'ve received your enquiry for <strong>' + info.label + '</strong>.</p>' +
+          '<p>Estimated pricing: <strong>' + info.price + '</strong>.</p>' +
+          '<p>Required date: <strong>' + chosenDate + '</strong>.</p>' +
+          guestLine +
+          '<p>A member of our team will contact you at <strong>' + email +
+          '</strong> within 24 hours to confirm your order and final pricing.</p>';
+        responseBox.style.display = 'block';
+        responseBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        enquiryForm.reset();
+      }
+    });
+
+    /* Clear individual field error as the user corrects their input */
+    ['name', 'email', 'phone', 'product', 'date', 'guests'].forEach(function (fieldId) {
+      const el = document.getElementById(fieldId);
+      if (el) {
+        el.addEventListener('input',  function () { clearError(fieldId); });
+        el.addEventListener('change', function () { clearError(fieldId); });
+      }
     });
   }
 
-  if (searchInput) {
-    searchInput.addEventListener('input', applyFilter);
-  }
 
-  /* ── 2. Hamburger Menu Toggle ──────────────────────────────
-     Collapses and expands the nav on mobile screens          */
-  const hamburger = document.querySelector('.hamburger');
-  const navMenu   = document.querySelector('nav ul');
+  /* ── 7. Contact Form Validation + Mailto Email ──────────────
+     Validates the contact form then opens the user's mail
+     client with a pre-filled email ready to send             */
+  const contactForm = document.getElementById('contact-form');
 
-  if (hamburger && navMenu) {
-    hamburger.addEventListener('click', function () {
-      navMenu.classList.toggle('nav-open');
-      hamburger.classList.toggle('active');
-    });
+  if (contactForm) {
 
-    /* Close menu when a nav link is clicked on mobile */
-    document.querySelectorAll('nav ul li a').forEach(function (link) {
-      link.addEventListener('click', function () {
-        navMenu.classList.remove('nav-open');
-        hamburger.classList.remove('active');
-      });
-    });
-  }
+    function showContactError(fieldId, message) {
+      const el = document.getElementById(fieldId + '-error');
+      if (el) { el.textContent = message; el.style.display = 'block'; }
+      const input = document.getElementById(fieldId);
+      if (input) input.classList.add('input-error');
+    }
 
-  /* ── 3. Scroll Fade-In Animation ───────────────────────────
-     Cards and sections fade in as the user scrolls down      */
-  const fadeElements = document.querySelectorAll('.card, .section-title, .about-grid, .page-hero');
+    function clearContactError(fieldId) {
+      const el = document.getElementById(fieldId + '-error');
+      if (el) { el.textContent = ''; el.style.display = 'none'; }
+      const input = document.getElementById(fieldId);
+      if (input) input.classList.remove('input-error');
+    }
 
-  if ('IntersectionObserver' in window) {
-    const observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
+    contactForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      ['contact-name', 'contact-email', 'message-type', 'contact-message'].forEach(clearContactError);
+
+      let valid = true;
+
+      /* Name */
+      const name = document.getElementById('contact-name').value.trim();
+      if (!name || name.length < 2) {
+        showContactError('contact-name', 'Please enter your full name.');
+        valid = false;
+      }
+
+      /* Email */
+      const email = document.getElementById('contact-email').value.trim();
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showContactError('contact-email', 'Please enter a valid email address.');
+        valid = false;
+      }
+
+      /* Message type */
+      const msgType = document.getElementById('message-type').value;
+      if (!msgType) {
+        showContactError('message-type', 'Please select a message type.');
+        valid = false;
+      }
+
+      /* Message body — minimum 20 characters */
+      const message = document.getElementById('contact-message').value.trim();
+      if (!message || message.length < 20) {
+        showContactError('contact-message', 'Please enter a message of at least 20 characters.');
+        valid = false;
+      }
+
+      /* All valid — compile and open mailto link */
+      if (valid) {
+        const subject    = encodeURIComponent('Sweet Pastry Bakery — ' + msgType + ' from ' + name);
+        const body       = encodeURIComponent(
+          'Name: '         + name    + '\n' +
+          'Email: '        + email   + '\n' +
+          'Message Type: ' + msgType + '\n\n' +
+          'Message:\n'     + message
+        );
+        const mailtoLink = 'mailto:sanibonani@sweetpastrybakery.co.za?subject=' + subject + '&body=' + body;
+        window.location.href = mailtoLink;
+
+        const responseBox = document.getElementById('contact-response');
+        responseBox.innerHTML =
+          '<h3>Your message is ready to send!</h3>' +
+          '<p>Your email client should have opened with a pre-filled message. If it did not open, please email us directly at <strong>sanibonani@sweetpastrybakery.co.za</strong>.</p>' +
+          '<p>We respond to all messages within 1 business day.</p>';
+        responseBox.style.display = 'block';
+        contactForm.reset();
+        responseBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
+      /* Clear individual errors as the user types */
+      ['contact-name', 'contact-email', 'message-type', 'contact-message'].forEach(function (id) {
+        const el = document.getElementById(id);
+        if (el) {
+          el.addEventListener('input',  function () { clearContactError(id); });
+          el.addEventListener('change', function () { clearContactError(id); });
         }
       });
-    }, { threshold: 0.1 });
-
-    fadeElements.forEach(function (el) {
-      el.classList.add('fade-in');
-      observer.observe(el);
-    });
-  } else {
-    /* Fallback for older browsers — just show everything */
-    fadeElements.forEach(function (el) {
-      el.classList.add('visible');
     });
   }
 
-  /* ── 4. Active Nav Link Highlight ──────────────────────────
-     Highlights the current page link in the navigation       */
-  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-  document.querySelectorAll('nav ul li a').forEach(function (link) {
-    if (link.getAttribute('href') === currentPage) {
-      link.classList.add('active-link');
-    }
-  }); 
 
-});
+}); /* end DOMContentLoaded */

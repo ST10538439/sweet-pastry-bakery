@@ -109,16 +109,20 @@ Website that works perfectly well, for Wede5020. Sjould be responsive!
 - Live URL: https://shiny-donut-866d71.netlify.app/
 
 ### Changelog — Part 3
-- [2026-19-06] Created js/main.js with hamburger nav and scroll animations
-- [2026-19-06] Added product search and category filter on products.html
-- [2026-19-06] Added gallery section and lightbox with keyboard support
-- [2026-19-06] Added SEO meta tags to all 5 pages
-- [2026-19-06] Added enquiry form JS validation with pricing response
-- [2026-19-06] Added contact form JS validation with mailto functionality
-- [2026-19-06] Created robots.txt and sitemap.xml
-- [2026-19-06] Deployed live site to Netlify
-- [2026-19-06] Updated README with Part 3 details and live URL
+- [2026-06-19] Created js/main.js with hamburger nav and scroll animations
+- [2026-06-19] Added product search and category filter on products.html
+- [2026-06-19] Added gallery section and lightbox with keyboard support
+- [2026-06-19] Added SEO meta tags to all 5 pages
+- [2026-06-19] Added enquiry form JS validation with pricing response
+- [2026-06-19] Added contact form JS validation with mailto functionality
+- [2026-06-19] Created robots.txt and sitemap.xml
+- [2026-06-19] Deployed live site to Netlify
+- [2026-06-19] Updated README with Part 3 details and live URL
 
 ## References
 - Unsplash. 2026. Available at: https://unsplash.com [Accessed: 20 May 2026].
 - W3Schools. 2026. Available at: https://www.w3schools.com [Accessed: 20 May 2026].
+- MDN Web Docs. 2026. JavaScript — HTML DOM. Available at: https://developer.mozilla.org [Accessed: 19 June 2026].
+- Google Fonts. 2026. Playfair Display and Lato. Available at: https://fonts.google.com [Accessed: 20 May 2026].
+- Netlify. 2026. Web deployment platform. Available at: https://www.netlify.com [Accessed: 19 June 2026].
+- Font Awesome. 2026. Icon library. Available at: https://fontawesome.com [Accessed: 19 June 2026].

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://shiny-donut-866d71.netlify.app/
+Sitemap: https://shiny-donut-866d71.netlify.app/sitemap.xml
