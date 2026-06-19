@@ -13,12 +13,18 @@
   <!-- Stylesheet -->
   <link rel="stylesheet" href="css/style.css">
 </head>
+ <script src="js/main.js"></script>
 <body>
 
   <!-- Header and Navigation -->
 <header>
   <div class="header-inner">
     <span class="logo">Sweet Pastry Bakery</span>
+    <button class="hamburger" aria-label="Toggle navigation menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
     <nav>
       <ul>
         <li><a href="index.html">Home</a></li>
@@ -32,10 +38,95 @@
 </header>
 
   <!-- Main Content -->
-  <main>
-    <h1>Enquiry Form</h1>
-    <p>Please fill out the form below to get in touch with us.</p>
-  </main>
+ <main>
+
+  <section class="page-hero">
+    <div class="container">
+      <h1>Make an Enquiry</h1>
+      <p>Interested in a custom order or catering package? Fill in the form below and we'll get back to you within 24 hours.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="contact-grid">
+
+        <!-- Enquiry Form -->
+        <div>
+          <h2>Order Enquiry Form</h2>
+          <form action="#" method="POST">
+
+            <div class="form-group">
+              <label for="name">Full Name *</label>
+              <input type="text" id="name" name="name" placeholder="e.g. Thandiwe Mokoena" required>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email Address *</label>
+              <input type="email" id="email" name="email" placeholder="e.g. thandiwe@email.com" required>
+            </div>
+
+            <div class="form-group">
+              <label for="phone">Phone Number *</label>
+              <input type="tel" id="phone" name="phone" placeholder="e.g. 082 000 0000" required>
+            </div>
+
+            <div class="form-group">
+              <label for="product">Product / Service *</label>
+              <select id="product" name="product" required>
+                <option value="">— Select a product —</option>
+                <option value="bread">Artisan Breads</option>
+                <option value="pastries">Pastries & Desserts</option>
+                <option value="birthday-cake">Birthday Cake</option>
+                <option value="wedding-cake">Wedding Cake</option>
+                <option value="corporate">Corporate / Events</option>
+                <option value="seasonal">Seasonal Specials</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="date">Required Date *</label>
+              <input type="date" id="date" name="date" required>
+            </div>
+
+            <div class="form-group">
+              <label for="guests">Number of Guests / Portions</label>
+              <input type="number" id="guests" name="guests" placeholder="e.g. 50" min="1">
+            </div>
+
+            <div class="form-group">
+              <label for="message">Additional Details</label>
+              <textarea id="message" name="message" placeholder="Tell us more about your order — flavours, design ideas, dietary requirements, etc."></textarea>
+            </div>
+
+            <button type="submit" class="btn">Submit Enquiry</button>
+
+          </form>
+        </div>
+
+        <!-- Info Panel -->
+        <div class="contact-info">
+          <h2>What Happens Next?</h2>
+          <p>Once you submit your enquiry, a member of our team will contact you within 24 hours to discuss your order in detail.</p>
+          <p>For urgent orders, please call us directly:</p>
+          <p><strong>Tel:</strong> 012 765 4321</p>
+          <p><strong>Email:</strong> sanibonani@sweetpastrybakery.co.za</p>
+          <p><strong>Hours:</strong> Mon–Fri 07:00–17:00 | Sat 07:00–13:00</p>
+
+          <h3 style="margin-top: 2rem;">Pricing Guide</h3>
+          <p>Custom cakes: from R 450</p>
+          <p>Wedding cakes: from R 1 800</p>
+          <p>Corporate packages: from R 650</p>
+          <p>Bread orders (bulk): from R 180</p>
+          <p><em>Final pricing confirmed after consultation.</em></p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main>
 
   <!-- Footer -->
   <footer>
