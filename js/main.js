@@ -6,6 +6,7 @@
 
 /* ── 1. Wait for page to fully load before running anything ── */
 document.addEventListener('DOMContentLoaded', function () {
+  
   /* ── 5. Product Filter and Search ──────────────────────────
      Filters product cards by category and search keyword     */
   const filterBtns  = document.querySelectorAll('.filter-btn');
@@ -31,6 +32,68 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   }
+  /* ── 6. Gallery Lightbox ────────────────────────────────────
+     Opens clicked gallery images in a full-screen overlay    */
+  const lightbox      = document.getElementById('lightbox');
+  const lightboxImg   = document.getElementById('lightbox-img');
+  const lightboxCap   = document.getElementById('lightbox-caption');
+  const lightboxClose = document.getElementById('lightbox-close');
+  const lightboxPrev  = document.getElementById('lightbox-prev');
+  const lightboxNext  = document.getElementById('lightbox-next');
+  const galleryItems  = document.querySelectorAll('.gallery-item img');
+
+  let currentIndex = 0;
+
+  function openLightbox(index) {
+    if (!lightbox || galleryItems.length === 0) return;
+    currentIndex = index;
+    const img = galleryItems[currentIndex];
+    lightboxImg.src = img.getAttribute('data-full') || img.src;
+    lightboxImg.alt = img.alt;
+    lightboxCap.textContent = img.alt;
+    lightbox.classList.add('lightbox-open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    if (!lightbox) return;
+    lightbox.classList.remove('lightbox-open');
+    document.body.style.overflow = '';
+  }
+
+  function showPrev() {
+    currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+    openLightbox(currentIndex);
+  }
+
+  function showNext() {
+    currentIndex = (currentIndex + 1) % galleryItems.length;
+    openLightbox(currentIndex);
+  }
+
+  galleryItems.forEach(function (img, i) {
+    img.style.cursor = 'pointer';
+    img.addEventListener('click', function () { openLightbox(i); });
+  });
+
+  if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+  if (lightboxPrev)  lightboxPrev.addEventListener('click', showPrev);
+  if (lightboxNext)  lightboxNext.addEventListener('click', showNext);
+
+  /* Close lightbox when clicking outside the image */
+  if (lightbox) {
+    lightbox.addEventListener('click', function (e) {
+      if (e.target === lightbox) closeLightbox();
+    });
+  }
+
+  /* Keyboard navigation */
+  document.addEventListener('keydown', function (e) {
+    if (!lightbox || !lightbox.classList.contains('lightbox-open')) return;
+    if (e.key === 'Escape')     closeLightbox();
+    if (e.key === 'ArrowLeft')  showPrev();
+    if (e.key === 'ArrowRight') showNext();
+  });
 
   if (filterBtns.length > 0) {
     filterBtns.forEach(function (btn) {

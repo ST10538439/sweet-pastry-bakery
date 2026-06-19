@@ -224,7 +224,55 @@
       </div>
     </div>
   </section>
+<!-- Gallery Section with Lightbox -->
+<section class="featured">
+  <div class="container">
+    <div class="section-title">
+      <h2>Our Gallery</h2>
+      <p>A look at what we create every day — click any image to view it larger.</p>
+    </div>
+    <div class="gallery-grid" id="gallery">
+      <div class="gallery-item">
+        <img src="images/gallery/hero-banner.jpg"       alt="Sweet Pastry Bakery storefront" data-full="images/gallery/hero-banner.jpg">
+      </div>
+      <div class="gallery-item">
+        <img src="images/gallery/bakery-interior.jpg"   alt="Inside the Sweet Pastry Bakery kitchen" data-full="images/gallery/bakery-interior.jpg">
+      </div>
+      <div class="gallery-item">
+        <img src="images/gallery/sourdough-loaves.jpg"  alt="Fresh sourdough loaves cooling on a rack" data-full="images/gallery/sourdough-loaves.jpg">
+      </div>
+      <div class="gallery-item">
+        <img src="images/gallery/pastry-display.jpg"    alt="Pastry display counter" data-full="images/gallery/pastry-display.jpg">
+      </div>
+      <div class="gallery-item">
+        <img src="images/gallery/birthday-cake.jpg"     alt="Custom birthday cake" data-full="images/gallery/birthday-cake.jpg">
+      </div>
+      <div class="gallery-item">
+        <img src="images/gallery/wedding-cake.jpg"      alt="Elegant tiered wedding cake" data-full="images/gallery/wedding-cake.jpg">
+      </div>
+      <div class="gallery-item">
+        <img src="images/gallery/bread-assortment.jpg"  alt="Assorted artisan bread selection" data-full="images/gallery/bread-assortment.jpg">
+      </div>
+      <div class="gallery-item">
+        <img src="images/gallery/dessert-tray.jpg"      alt="Dessert tray for events" data-full="images/gallery/dessert-tray.jpg">
+      </div>
+      <div class="gallery-item">
+        <img src="images/gallery/corporate-event.jpg"   alt="Corporate catering setup" data-full="images/gallery/corporate-event.jpg">
+      </div>
+    </div>
+  </div>
+</section>
 
+<!-- Lightbox Overlay -->
+<div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <button class="lightbox-close" id="lightbox-close" aria-label="Close image viewer">&times;</button>
+  <button class="lightbox-prev"  id="lightbox-prev"  aria-label="Previous image">&#8249;</button>
+  <button class="lightbox-next"  id="lightbox-next"  aria-label="Next image">&#8250;</button>
+  <div class="lightbox-content">
+    <img id="lightbox-img" src="" alt="">
+    <p  id="lightbox-caption"></p>
+  </div>
+</div>
 </main>
 
   <!-- Footer -->
